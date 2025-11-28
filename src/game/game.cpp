@@ -1,9 +1,11 @@
 #include "game/game.h"
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #include "game/game_settings.h"
 #include "screens/gameplay_screen.h"
+#include "audio/audio_manager.h"
 
 using namespace GameSettings;
 
@@ -44,6 +46,9 @@ namespace CactusClicker
 
     static void Init()
     {
+        AudioManager::background.setLooping(true);
+        AudioManager::background.play();
+
         Gameplay::Init();
     }
 
