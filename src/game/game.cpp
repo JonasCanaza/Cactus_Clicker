@@ -3,22 +3,25 @@
 #include <SFML/Graphics.hpp>
 
 #include "game/game_settings.h"
+#include "screens/gameplay_screen.h"
 
 using namespace GameSettings;
 
 namespace CactusClicker
 {
+    Screens currentScreen;
+
+    static void Init();
+    static void Input();
+    static void Update();
+    static void Draw();
+
     void Play()
     {
         sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), WINDOW_TITLE);
+        currentScreen = Screens::Gameplay;
 
-        // TEXT TEST
-        sf::Font font("res/font/Nunito-SemiBold.ttf");
-        sf::Text text(font);
-        text.setString("Cactus Clicker!");
-        text.setCharacterSize(48);
-        text.setFillColor(sf::Color::White);
-        text.setPosition({ 0.0f, 0.0f });
+        Init();
 
         while (window.isOpen())
         {
@@ -30,9 +33,68 @@ namespace CactusClicker
                 }
             }
 
+            Input();
+            Update();
+
             window.clear(sf::Color::Black);
-            window.draw(text);
+            Draw();
             window.display();
         }
 	}
+
+    static void Init()
+    {
+        Gameplay::Init();
+    }
+
+    static void Input()
+    {
+        switch (currentScreen)
+        {
+        case Screens::Gameplay:
+
+            Gameplay::Input();
+
+            break;
+        default:
+
+            // NO MORE SCREENS
+
+            break;
+        }
+    }
+
+    static void Update()
+    {
+        switch (currentScreen)
+        {
+        case Screens::Gameplay:
+
+            Gameplay::Update();
+
+            break;
+        default:
+
+            // NO MORE SCREENS
+
+            break;
+        }
+    }
+
+    static void Draw()
+    {
+        switch (currentScreen)
+        {
+        case Screens::Gameplay:
+
+            Gameplay::Draw();
+
+            break;
+        default:
+
+            // NO MORE SCREENS
+
+            break;
+        }
+    }
 }

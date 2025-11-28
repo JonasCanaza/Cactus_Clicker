@@ -5,10 +5,16 @@
     <ClCompile Include="src\game\game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="src\screens\gameplay_screen.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">
       <UniqueIdentifier>{47cbf10e-8ff8-4d0b-bc12-16bd248cf212}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Screens">
+      <UniqueIdentifier>{62f81b72-164b-40b0-ba4a-29a1b2d4c6f6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -17,6 +23,9 @@
     </ClInclude>
     <ClInclude Include="src\game\game_settings.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\screens\gameplay_screen.h">
+      <Filter>Screens</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
