@@ -1,8 +1,8 @@
-#include <iostream>
+#include "game/game.h"
 
 int main()
 {
-	std::cout << "Hello!" << std::endl;
+	CactusClicker::Play();
 
 	return 0;
 }
