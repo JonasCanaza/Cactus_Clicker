@@ -11,6 +11,9 @@
     <ClCompile Include="src\interface\font.cpp">
       <Filter>Interface</Filter>
     </ClCompile>
+    <ClCompile Include="src\audio\audio_manager.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">
@@ -21,6 +24,9 @@
     </Filter>
     <Filter Include="Interface">
       <UniqueIdentifier>{f465e7d5-1306-4134-b0a1-8057e0b9b28d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{2eb12688-7319-43a1-94aa-081131b66d7e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +41,9 @@
     </ClInclude>
     <ClInclude Include="src\interface\font.h">
       <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="src\audio\audio_manager.h">
+      <Filter>Audio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,9 +3,11 @@
 #include <iostream>
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #include "game/game_settings.h"
 #include "interface/font.h"
+#include "audio/audio_manager.h"
 
 using namespace GameSettings;
 
@@ -58,7 +60,7 @@ namespace Gameplay
 				rotationVelocity = ROTATION_SPEED;
 				rotationAngle += ROTATION_AMOUNT;
 
-				std::cout << "Click!" << std::endl;
+				AudioManager::clickSound.play();
 
 				leftWasPressed = true;
 			}
