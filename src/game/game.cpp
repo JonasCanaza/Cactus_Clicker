@@ -14,7 +14,7 @@ namespace CactusClicker
     static void Init();
     static void Input();
     static void Update();
-    static void Draw();
+    static void Draw(sf::RenderWindow& window);
 
     void Play()
     {
@@ -37,7 +37,7 @@ namespace CactusClicker
             Update();
 
             window.clear(sf::Color::Black);
-            Draw();
+            Draw(window);
             window.display();
         }
 	}
@@ -81,13 +81,13 @@ namespace CactusClicker
         }
     }
 
-    static void Draw()
+    static void Draw(sf::RenderWindow& window)
     {
         switch (currentScreen)
         {
         case Screens::Gameplay:
 
-            Gameplay::Draw();
+            Gameplay::Draw(window);
 
             break;
         default:

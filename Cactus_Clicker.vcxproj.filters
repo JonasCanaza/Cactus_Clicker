@@ -8,6 +8,9 @@
     <ClCompile Include="src\screens\gameplay_screen.cpp">
       <Filter>Screens</Filter>
     </ClCompile>
+    <ClCompile Include="src\interface\font.cpp">
+      <Filter>Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">
@@ -15,6 +18,9 @@
     </Filter>
     <Filter Include="Screens">
       <UniqueIdentifier>{62f81b72-164b-40b0-ba4a-29a1b2d4c6f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{f465e7d5-1306-4134-b0a1-8057e0b9b28d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -26,6 +32,9 @@
     </ClInclude>
     <ClInclude Include="src\screens\gameplay_screen.h">
       <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interface\font.h">
+      <Filter>Interface</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
