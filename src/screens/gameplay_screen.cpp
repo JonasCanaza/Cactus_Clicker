@@ -1,7 +1,5 @@
 #include "screens/gameplay_screen.h"
 
-#include <iostream>
-
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
@@ -20,6 +18,17 @@ namespace Gameplay
 	static const int TEXT_COUNTER_POS_Y = 50;
 	static const int FONT_SIZE = 48;
 
+	static float textScale = 1.0f;
+	static float textScaleVelocity = 0.0f;
+	static const float TEXT_SCALE_AMOUNT = 0.3f;
+	static const float TEXT_SCALE_SPEED = 6.0f;
+	static const float TEXT_SCALE_BASE = 1.0f;
+
+	static float textOffsetY = 0.0f;
+	static float textVelocityY = 0.0f;
+	static const float TEXT_BOUNCE_HEIGHT = 10.0f;
+	static const float TEXT_BOUNCE_SPEED = 200.0f;
+
 	static sf::Texture cactusTexture("res/textures/cactus.png");
 	static sf::Sprite cactusSprite(cactusTexture);
 	static float bounceOffset;
@@ -35,6 +44,7 @@ namespace Gameplay
 
 	static void InitCounter();
 	static void UpdateCounter();
+	static void UpdateAnimationCounter(float deltaTime);
 	static void DrawCounter(sf::RenderWindow& window);
 
 	static void InitCactus();
@@ -62,6 +72,11 @@ namespace Gameplay
 				rotationVelocity = ROTATION_SPEED;
 				rotationAngle += ROTATION_AMOUNT;
 
+				textScaleVelocity = TEXT_SCALE_SPEED;
+				textScale += TEXT_SCALE_AMOUNT;
+
+				textVelocityY = -TEXT_BOUNCE_SPEED;
+
 				AudioManager::clickSound.play();
 
 				leftWasPressed = true;
@@ -80,6 +95,7 @@ namespace Gameplay
 
 		BackgroundManager::Update(deltaTime);
 		UpdateCactus(deltaTime);
+		UpdateAnimationCounter(deltaTime);
 	}
 
 	void Draw(sf::RenderWindow& window)
@@ -110,8 +126,44 @@ namespace Gameplay
 		textCounter.setPosition(sf::Vector2f(WINDOW_WIDTH / 2.0f, TEXT_COUNTER_POS_Y));
 	}
 
+	static void UpdateAnimationCounter(float deltaTime)
+	{
+		if (textScale > TEXT_SCALE_BASE)
+		{
+			textScale -= textScaleVelocity * deltaTime;
+
+			if (textScale < TEXT_SCALE_BASE)
+			{
+				textScale = TEXT_SCALE_BASE;
+			}
+		}
+
+		if (textOffsetY != 0.0f || textVelocityY != 0.0f)
+		{
+			textOffsetY += textVelocityY * deltaTime;
+
+			if (textOffsetY < -TEXT_BOUNCE_HEIGHT)
+			{
+				textOffsetY = -TEXT_BOUNCE_HEIGHT;
+				textVelocityY = TEXT_BOUNCE_SPEED;
+			}
+
+			if (textVelocityY > 0.0f && textOffsetY >= 0.0f)
+			{
+				textOffsetY = 0.0f;
+				textVelocityY = 0.0f;
+			}
+		}
+	}
+
 	static void DrawCounter(sf::RenderWindow& window)
 	{
+		textCounter.setScale(sf::Vector2f(textScale, textScale));
+
+		sf::FloatRect bounds = textCounter.getLocalBounds();
+		textCounter.setOrigin(sf::Vector2f(bounds.size.x / 2.0f, bounds.size.y / 2.0f));
+		textCounter.setPosition(sf::Vector2f(WINDOW_WIDTH / 2.0f, TEXT_COUNTER_POS_Y + textOffsetY));
+
 		window.draw(textCounter);
 	}
 
