@@ -17,15 +17,31 @@ namespace Gameplay
 	static const int TEXT_COUNTER_POS_Y = 50;
 	static const int FONT_SIZE = 48;
 
+	static sf::Texture cactusTexture("res/textures/cactus.png");
+	static sf::Sprite cactusSprite(cactusTexture);
+	static float bounceOffset;
+	static float bounceVelocity;
+	static const float BOUNCE_HEIGHT = 10.0f;
+	static const float BOUNCE_SPEED = 150.0f;
+	static float rotationAngle;
+	static float rotationVelocity;
+	static const float ROTATION_AMOUNT = 5.0f;
+	static const float ROTATION_SPEED = 100.0f;
+
 	static bool leftWasPressed;
 
 	static void InitCounter();
 	static void UpdateCounter();
 	static void DrawCounter(sf::RenderWindow& window);
 
+	static void InitCactus();
+	static void UpdateCactus(float deltaTime);
+	static void DrawCactus(sf::RenderWindow& window);
+
 	void Init()
 	{
 		InitCounter();
+		InitCactus();
 
 		leftWasPressed = false;
 	}
@@ -38,6 +54,10 @@ namespace Gameplay
 			{
 				UpdateCounter();
 
+				bounceVelocity = -BOUNCE_SPEED;
+				rotationVelocity = ROTATION_SPEED;
+				rotationAngle += ROTATION_AMOUNT;
+
 				std::cout << "Click!" << std::endl;
 
 				leftWasPressed = true;
@@ -47,18 +67,20 @@ namespace Gameplay
 		{
 			leftWasPressed = false;
 		}
-
 	}
 
 	void Update()
 	{
+		static sf::Clock clock;
+		float deltaTime = clock.restart().asSeconds();
 
+		UpdateCactus(deltaTime);
 	}
-
 
 	void Draw(sf::RenderWindow& window)
 	{
 		DrawCounter(window);
+		DrawCactus(window);
 	}
 
 	static void InitCounter()
@@ -85,5 +107,69 @@ namespace Gameplay
 	static void DrawCounter(sf::RenderWindow& window)
 	{
 		window.draw(textCounter);
+	}
+
+	static void InitCactus()
+	{
+		bounceOffset = 0.0f;
+		bounceVelocity = 0.0f;
+		rotationAngle = 0.0f;
+		rotationVelocity = 0.0f;
+
+		cactusSprite.setTexture(cactusTexture);
+
+		sf::FloatRect bounds = cactusSprite.getLocalBounds();
+		cactusSprite.setOrigin(sf::Vector2f(bounds.size.x / 2.0f, bounds.size.y / 2.0f));
+		cactusSprite.setPosition(sf::Vector2f(WINDOW_WIDTH / 2.0f, WINDOW_HEIGHT / 2.0f));
+	}
+
+	static void UpdateCactus(float deltaTime)
+	{
+		if (bounceVelocity != 0.0f || bounceOffset != 0.0f)
+		{
+			bounceOffset += bounceVelocity * deltaTime;
+
+			if (bounceOffset < -BOUNCE_HEIGHT)
+			{
+				bounceOffset = -BOUNCE_HEIGHT;
+				bounceVelocity = BOUNCE_SPEED;
+			}
+
+			if (bounceVelocity > 0.0f && bounceOffset >= 0.0f)
+			{
+				bounceOffset = 0.0f;
+				bounceVelocity = 0.0f;
+			}
+		}
+
+		if (rotationAngle != 0.0f)
+		{
+			if (rotationAngle > 0.0f)
+			{
+				rotationAngle -= ROTATION_SPEED * deltaTime;
+
+				if (rotationAngle < 0.0f)
+				{
+					rotationAngle = 0.0f;
+				}
+			}
+			else if (rotationAngle < 0.0f)
+			{
+				rotationAngle += ROTATION_SPEED * deltaTime;
+
+				if (rotationAngle > 0.0f)
+				{
+					rotationAngle = 0.0f;
+				}
+			}
+		}
+
+		cactusSprite.setPosition(sf::Vector2f(WINDOW_WIDTH / 2.0f, WINDOW_HEIGHT / 2.0f + bounceOffset));
+		cactusSprite.setRotation(sf::degrees(rotationAngle));
+	}
+
+	static void DrawCactus(sf::RenderWindow& window)
+	{
+		window.draw(cactusSprite);
 	}
 }
