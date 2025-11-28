@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\audio\audio_manager.cpp" />
+    <ClCompile Include="src\background\background_manager.cpp" />
     <ClCompile Include="src\game\game.cpp" />
     <ClCompile Include="src\interface\font.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -19,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\audio\audio_manager.h" />
+    <ClInclude Include="src\background\background_manager.h" />
     <ClInclude Include="src\game\game.h" />
     <ClInclude Include="src\game\game_settings.h" />
     <ClInclude Include="src\interface\font.h" />

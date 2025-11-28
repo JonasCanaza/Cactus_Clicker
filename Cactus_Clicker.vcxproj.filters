@@ -14,6 +14,9 @@
     <ClCompile Include="src\audio\audio_manager.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
+    <ClCompile Include="src\background\background_manager.cpp">
+      <Filter>Background</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">
@@ -27,6 +30,9 @@
     </Filter>
     <Filter Include="Audio">
       <UniqueIdentifier>{2eb12688-7319-43a1-94aa-081131b66d7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Background">
+      <UniqueIdentifier>{363c6e68-024a-4a08-bc68-f39158bf8162}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +50,9 @@
     </ClInclude>
     <ClInclude Include="src\audio\audio_manager.h">
       <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\background\background_manager.h">
+      <Filter>Background</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

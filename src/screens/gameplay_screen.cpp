@@ -8,6 +8,7 @@
 #include "game/game_settings.h"
 #include "interface/font.h"
 #include "audio/audio_manager.h"
+#include "background/background_manager.h"
 
 using namespace GameSettings;
 
@@ -42,6 +43,7 @@ namespace Gameplay
 
 	void Init()
 	{
+		BackgroundManager::Init();
 		InitCounter();
 		InitCactus();
 
@@ -76,11 +78,13 @@ namespace Gameplay
 		static sf::Clock clock;
 		float deltaTime = clock.restart().asSeconds();
 
+		BackgroundManager::Update(deltaTime);
 		UpdateCactus(deltaTime);
 	}
 
 	void Draw(sf::RenderWindow& window)
 	{
+		BackgroundManager::Draw(window);
 		DrawCounter(window);
 		DrawCactus(window);
 	}
